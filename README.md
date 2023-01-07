@@ -73,3 +73,55 @@ homeassistant.local:8123
 17. Wait for about 5 minutes for preparing
 18. Create administrator account
 19. Choose country and language, press "Next", press "Next", press "Finish"
+
+20. Enable USB
+
+20.1 Shutdown Compute module
+20.2 Switch BOOT to ON on IO board
+20.3 Connect USB type-c cable both to IO board and computer
+20.4 Start usbboot
+
+sudo ./rpiboot
+
+RPIBOOT: build-date Jan  6 2023 version 20221215~105525 e4819de4
+Waiting for BCM2835/6/7/2711...
+Loading embedded: bootcode4.bin
+Sending bootcode.bin
+Successful read 4 bytes 
+Waiting for BCM2835/6/7/2711...
+ Loading embedded: bootcode4.bin
+Second stage boot server
+Cannot open file config.txt
+Cannot open file pieeprom.sig
+Loading embedded: start4.elf
+File read: start4.elf
+Cannot open file fixup4.dat
+Second stage boot server done
+
+20.5 Find first partition on Compute module
+
+diskutil list
+
+/dev/disk0 (internal, physical):
+...
+
+/dev/disk1 (synthesized):
+...
+
+/dev/disk2 (external, physical):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *31.3 GB    disk2
+   1:         Microsoft Reserved                         33.6 MB    disk2s1
+   2:           Linux Filesystem                         25.2 MB    disk2s2
+   3:           Linux Filesystem                         268.4 MB   disk2s3
+   4:           Linux Filesystem                         25.2 MB    disk2s4
+   5:           Linux Filesystem                         268.4 MB   disk2s5
+   6:           Linux Filesystem                         8.4 MB     disk2s6
+   7:           Linux Filesystem                         100.7 MB   disk2s7
+   8:           Linux Filesystem                         30.5 GB    disk2s8
+
+20.6 Mount partition to some folder
+
+mkdir boot
+
+sudo mount -t msdos /dev/disk2s1 boot

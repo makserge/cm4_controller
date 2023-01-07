@@ -125,3 +125,26 @@ diskutil list
 mkdir boot
 
 sudo mount -t msdos /dev/disk2s1 boot
+
+20.7 Edit config.txt 
+
+cd boot
+nano config.txt
+
+Add to the end
+
+[cm4]
+# Enable host mode on the 2711 built-in XHCI USB controller.
+# This line should be removed if the legacy DWC2 controller is required
+# (e.g. for USB device mode) or if USB support is not required.
+otg_mode=1
+
+20.8 Unmount boot
+
+cd ..
+sudo umount boot
+
+20.9. Disconnect USB type-c cable from computer
+20.10. Switch BOOT to OFF on IO board
+
+

@@ -147,4 +147,31 @@ sudo umount boot
 20.9. Disconnect USB type-c cable from computer
 20.10. Switch BOOT to OFF on IO board
 
+21. Enable SSH on host
 
+21.1 Create public key
+
+ssh-keygen -t ed25519 -C "your_email@example.com"
+cp hass.pub authorized_keys
+
+21.2 Copy an authorized_keys file to the root of the USB flash drive with label CONFIG and FAT, ext4, or NTFS filesystem. 
+21.3 Insert flash drive and keyboard to compute module system and switch power on
+21.4 In console run
+
+host shutdown 
+
+21.5 Remove flash drive and keyboard and switch power on and wait until system boot up
+21.6 Add ssh key
+
+chmod 600 name_of_privatekey
+ssh-add name_of_privatekey
+
+21.7 Check SSH key
+
+ssh-add -l
+
+and make sure that key is here
+
+21.8 Login to SSH 
+
+ssh root@homeassistant.local -p 22222

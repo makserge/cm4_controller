@@ -193,18 +193,3 @@ homeassistant.local:8123
 20.2. Wait for about 5 minutes for preparing
 20.3 Create administrator account
 20.4. Choose country and language, press "Next", press "Next", press "Finish"
-
-
-/dev/disk2 (external, physical):
-   #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:      GUID_partition_scheme                        *31.3 GB    disk2
-   1:         Microsoft Reserved                         33.6 MB    disk2s1
-   2:           Linux Filesystem                         25.2 MB    disk2s2
-   3:           Linux Filesystem                         268.4 MB   disk2s3
-   4:           Linux Filesystem                         25.2 MB    disk2s4
-   5:           Linux Filesystem                         268.4 MB   disk2s5
-   6:           Linux Filesystem                         8.4 MB     disk2s6
-   7:           Linux Filesystem                         100.7 MB   disk2s7
-   8:           Linux Filesystem                         30.5 GB    disk2s8
-
-20.6 Mount partition to some folder

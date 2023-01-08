@@ -185,11 +185,53 @@ and make sure that key is here
 
 ssh root@homeassistant.local -p 22222
 
+20. Enable fan and RTC
 
-20. Setup HA 
+20.1 Edit config
+vi /mnt/boot/config.txt
 
-20.1 In the browser of your Computer, within a few minutes you will be able to reach your new Home Assistant on 
+add
+
+# Enable RTC
+dtparam=i2c_vc=on
+dtoverlay=i2c-rtc,pcf85063a,i2c_csi_dsi
+
+# Fan Controller
+dtoverlay=i2c-fan,emc2301,i2c_csi_dsi,midtemp=45000,maxtemp=50000
+
+20.1 Reboot 
+
+ha host reboot
+
+21. Setup HA 
+
+21.1 In the browser of your Computer, within a few minutes you will be able to reach your new Home Assistant on 
 homeassistant.local:8123
-20.2. Wait for about 5 minutes for preparing
-20.3 Create administrator account
-20.4. Choose country and language, press "Next", press "Next", press "Finish"
+21.2. Wait for about 5 minutes for preparing
+21.3 Create administrator account
+21.4. Choose country and language, press "Next", press "Next", press "Finish"
+21.5 Enable advanced mode
+Open http://homeassistant.local:8123/profile
+
+22. MQTT Mosquitto broker
+
+22.1 Open http://homeassistant.local:8123/config/users
+and add new user for mosquitto
+
+22.2 Open http://homeassistant.local:8123/hassio/store and find "Mosquitto"
+22.3 Press "Install" and wait until it installed
+22.4 Enable watchdog
+22.5 Configuration (switch to YAML):
+
+logins:
+  - username: myusername-change-this
+    password: mypassword-change-this
+require_certificate: false
+certfile: fullchain.pem
+keyfile: privkey.pem
+customize:
+  active: false
+  folder: mosquitto
+anonymous: false
+
+22.6 Press "Start"

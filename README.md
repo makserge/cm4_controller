@@ -235,3 +235,45 @@ customize:
 anonymous: false
 
 22.6 Press "Start"
+
+23. Install Samba Add-on
+
+23.1 Open http://homeassistant.local:8123/hassio/store and find "Samba"
+23.2 Click on "Samba share" then "Install"
+23.3 Tap "Configuration" tab and fill username / password then press "Save"
+23.4 Tap "Info" tab and click "Start"
+
+24. Install HACS Add-on
+
+24.1 Open http://homeassistant.local:8123/hassio/store and find "Terminal & SSH", select it and press "Install", then "Start"
+24.2 Press "Open Web UI" and in terminal paste
+
+wget -O - https://get.hacs.xyz | bash -
+
+24.3 Restart HA
+
+ha core restart
+
+24.4 Open "Settings", then "Devices & Services", then "Add integration"
+24.5 Search for "HACS" and select it.
+24.6 Check all checkboxes and press "Submit"
+24.7 Open provided link in new browser tab and enter Device activation key taken from this popup
+24.8 Press "Continue" then "Authorize hacs"
+24.9 Press "Finish" in popup
+24.10 Open http://homeassistant.local:8123/hassio/addon/core_ssh/info , then Press "Open Web UI" and in terminal paste
+
+ha core restart
+
+25. Install Music Assistant
+
+25.1 In the HACS panel, go to integrations.
+25.2 Search for "Music Assistant" and click "Explore & Download repositories", then select "Music Assistant" 
+25.3 Click "Download", click "Download"
+25.4 Open http://homeassistant.local:8123/hassio/addon/core_ssh/info , then Press "Start", then "Open Web UI" and in terminal paste
+
+ha core restart
+
+25.5 Open "Settings", then "Devices & Services", then "Add integration"
+25.6 Search for "Music Assistant" and select it.
+25.7 Complete configuration wizard
+

@@ -3,13 +3,23 @@
 Reference to official installation guide:
 https://www.home-assistant.io/installation/raspberrypi
 
-0. Connect fan to IO board:
+0.1 Connect fan to IO board:
 (Pin numeration from top to bottom)
 
 1 - yellow
 2 - blue
 3 - red
 4 - black
+
+0.2 Connect PCM5102A DAC to IO board (40 pin socket)
+
+IO BOARD       DAC
+
+1 - 5V         - VIN
+3 - GND        - SCK and GND
+12 - PCM_CLK   - BCK
+35 - PCM_FS    - LCK
+40 - PCM_DOUT  - DIN
 
 All steps are done on macOS.
 
@@ -185,7 +195,7 @@ and make sure that key is here
 
 ssh root@homeassistant.local -p 22222
 
-20. Enable fan and RTC
+20. Enable fan, RTC and I2S
 
 20.1 Edit config
 vi /mnt/boot/config.txt
@@ -198,6 +208,13 @@ dtoverlay=i2c-rtc,pcf85063a,i2c_csi_dsi
 
 # Fan Controller
 dtoverlay=i2c-fan,emc2301,i2c_csi_dsi,midtemp=45000,maxtemp=50000
+
+#I2S DAC
+dtparam=i2s=on
+dtoverlay=hifiberry-dac
+
+Comment out
+#dtparam=audio=on
 
 20.1 Reboot 
 
@@ -276,4 +293,3 @@ ha core restart
 25.5 Open "Settings", then "Devices & Services", then "Add integration"
 25.6 Search for "Music Assistant" and select it.
 25.7 Complete configuration wizard
-

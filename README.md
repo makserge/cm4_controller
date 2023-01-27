@@ -28,38 +28,38 @@ All steps are done on macOS.
 
 3. Install usbboot 
 
-3.1 Clone the usbboot repository
-
-    git clone --depth=1 https://github.com/raspberrypi/usbboot
-
-3.2 Install libusb and pkg-config
-
-    brew install pkgconfig libusb
-
-3.3 Build using make
-
-    cd usbboot
-    make
-
-3.4 Run the binary
-
-    sudo ./rpiboot
-
-
-    RPIBOOT: build-date Jan  6 2023 version 20221215~105525 e4819de4
-    Waiting for BCM2835/6/7/2711...
-    Loading embedded: bootcode4.bin
-    Sending bootcode.bin
-    Successful read 4 bytes 
-    Waiting for BCM2835/6/7/2711...
-    Loading embedded: bootcode4.bin
-    Second stage boot server
-    Cannot open file config.txt
-    Cannot open file pieeprom.sig
-    Loading embedded: start4.elf
-    File read: start4.elf
-    Cannot open file fixup4.dat
-    Second stage boot server done
+    3.1 Clone the usbboot repository
+    
+        git clone --depth=1 https://github.com/raspberrypi/usbboot
+    
+    3.2 Install libusb and pkg-config
+    
+        brew install pkgconfig libusb
+    
+    3.3 Build using make
+    
+        cd usbboot
+        make
+    
+    3.4 Run the binary
+    
+        sudo ./rpiboot
+    
+    
+        RPIBOOT: build-date Jan  6 2023 version 20221215~105525 e4819de4
+        Waiting for BCM2835/6/7/2711...
+        Loading embedded: bootcode4.bin
+        Sending bootcode.bin
+        Successful read 4 bytes 
+        Waiting for BCM2835/6/7/2711...
+        Loading embedded: bootcode4.bin
+        Second stage boot server
+        Cannot open file config.txt
+        Cannot open file pieeprom.sig
+        Loading embedded: start4.elf
+        File read: start4.elf
+        Cannot open file fixup4.dat
+        Second stage boot server done
 
 4. Download (https://www.raspberrypi.com/software/) and start Raspberry Pi Imager
 5. Select “Raspberry PI OS (32 bit)” 
@@ -68,37 +68,37 @@ All steps are done on macOS.
 8. Close Raspberry Pi Imager
 9. Enable USB
 
-9.1 Shutdown Compute module
-9.2 Start usbboot
-
-    sudo ./rpiboot
-
-    RPIBOOT: build-date Jan  6 2023 version 20221215~105525 e4819de4
-    Waiting for BCM2835/6/7/2711...
-    Loading embedded: bootcode4.bin
-    Sending bootcode.bin
-    Successful read 4 bytes 
-    Waiting for BCM2835/6/7/2711...
-     Loading embedded: bootcode4.bin
-    Second stage boot server
-    Cannot open file config.txt
-    Cannot open file pieeprom.sig
-    Loading embedded: start4.elf
-    File read: start4.elf
-    Cannot open file fixup4.dat
-    Second stage boot server done
-
-9.3 Open "boot" disk and open config.txt
-
-Add to the end
-
-    [cm4]
-    # Enable host mode on the 2711 built-in XHCI USB controller.
-    # This line should be removed if the legacy DWC2 controller is required
-    # (e.g. for USB device mode) or if USB support is not required.
-    otg_mode=1
-
-9.4 Unmout "boot" disk
+    9.1 Shutdown Compute module
+    9.2 Start usbboot
+    
+        sudo ./rpiboot
+    
+        RPIBOOT: build-date Jan  6 2023 version 20221215~105525 e4819de4
+        Waiting for BCM2835/6/7/2711...
+        Loading embedded: bootcode4.bin
+        Sending bootcode.bin
+        Successful read 4 bytes 
+        Waiting for BCM2835/6/7/2711...
+         Loading embedded: bootcode4.bin
+        Second stage boot server
+        Cannot open file config.txt
+        Cannot open file pieeprom.sig
+        Loading embedded: start4.elf
+        File read: start4.elf
+        Cannot open file fixup4.dat
+        Second stage boot server done
+    
+    9.3 Open "boot" disk and open config.txt
+    
+    Add to the end
+    
+        [cm4]
+        # Enable host mode on the 2711 built-in XHCI USB controller.
+        # This line should be removed if the legacy DWC2 controller is required
+        # (e.g. for USB device mode) or if USB support is not required.
+        otg_mode=1
+    
+    9.4 Unmout "boot" disk
 
 10. Disconnect USB type-c cable from computer
 11. Switch BOOT to OFF on IO board
@@ -296,3 +296,10 @@ Reference: https://github.com/raspberrypi/usbboot
     25.5 Open "Settings", then "Devices & Services", then "Add integration"
     25.6 Search for "Music Assistant" and select it.
     25.7 Complete configuration wizard
+
+
+
+
+
+
+

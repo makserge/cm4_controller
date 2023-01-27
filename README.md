@@ -30,36 +30,36 @@ All steps are done on macOS.
 
 3.1 Clone the usbboot repository
 
-git clone --depth=1 https://github.com/raspberrypi/usbboot
+    git clone --depth=1 https://github.com/raspberrypi/usbboot
 
 3.2 Install libusb and pkg-config
 
-brew install pkgconfig libusb
+    brew install pkgconfig libusb
 
 3.3 Build using make
 
-cd usbboot
-make
+    cd usbboot
+    make
 
 3.4 Run the binary
 
-sudo ./rpiboot
+    sudo ./rpiboot
 
 
-RPIBOOT: build-date Jan  6 2023 version 20221215~105525 e4819de4
-Waiting for BCM2835/6/7/2711...
-Loading embedded: bootcode4.bin
-Sending bootcode.bin
-Successful read 4 bytes 
-Waiting for BCM2835/6/7/2711...
-Loading embedded: bootcode4.bin
-Second stage boot server
-Cannot open file config.txt
-Cannot open file pieeprom.sig
-Loading embedded: start4.elf
-File read: start4.elf
-Cannot open file fixup4.dat
-Second stage boot server done
+    RPIBOOT: build-date Jan  6 2023 version 20221215~105525 e4819de4
+    Waiting for BCM2835/6/7/2711...
+    Loading embedded: bootcode4.bin
+    Sending bootcode.bin
+    Successful read 4 bytes 
+    Waiting for BCM2835/6/7/2711...
+    Loading embedded: bootcode4.bin
+    Second stage boot server
+    Cannot open file config.txt
+    Cannot open file pieeprom.sig
+    Loading embedded: start4.elf
+    File read: start4.elf
+    Cannot open file fixup4.dat
+    Second stage boot server done
 
 4. Download (https://www.raspberrypi.com/software/) and start Raspberry Pi Imager
 5. Select “Raspberry PI OS (32 bit)” 
@@ -71,32 +71,32 @@ Second stage boot server done
 9.1 Shutdown Compute module
 9.2 Start usbboot
 
-sudo ./rpiboot
+    sudo ./rpiboot
 
-RPIBOOT: build-date Jan  6 2023 version 20221215~105525 e4819de4
-Waiting for BCM2835/6/7/2711...
-Loading embedded: bootcode4.bin
-Sending bootcode.bin
-Successful read 4 bytes 
-Waiting for BCM2835/6/7/2711...
- Loading embedded: bootcode4.bin
-Second stage boot server
-Cannot open file config.txt
-Cannot open file pieeprom.sig
-Loading embedded: start4.elf
-File read: start4.elf
-Cannot open file fixup4.dat
-Second stage boot server done
+    RPIBOOT: build-date Jan  6 2023 version 20221215~105525 e4819de4
+    Waiting for BCM2835/6/7/2711...
+    Loading embedded: bootcode4.bin
+    Sending bootcode.bin
+    Successful read 4 bytes 
+    Waiting for BCM2835/6/7/2711...
+     Loading embedded: bootcode4.bin
+    Second stage boot server
+    Cannot open file config.txt
+    Cannot open file pieeprom.sig
+    Loading embedded: start4.elf
+    File read: start4.elf
+    Cannot open file fixup4.dat
+    Second stage boot server done
 
 9.3 Open "boot" disk and open config.txt
 
 Add to the end
 
-[cm4]
-# Enable host mode on the 2711 built-in XHCI USB controller.
-# This line should be removed if the legacy DWC2 controller is required
-# (e.g. for USB device mode) or if USB support is not required.
-otg_mode=1
+    [cm4]
+    # Enable host mode on the 2711 built-in XHCI USB controller.
+    # This line should be removed if the legacy DWC2 controller is required
+    # (e.g. for USB device mode) or if USB support is not required.
+    otg_mode=1
 
 9.4 Unmout "boot" disk
 
@@ -116,24 +116,24 @@ otg_mode=1
 17. Enable USB and external Wi-Fi antenna
 17.1 Mount partition to some folder
 
-mkdir boot
+    mkdir boot
 
-sudo mount -t msdos /dev/nvme0n1p1 boot
+    sudo mount -t msdos /dev/nvme0n1p1 boot
 
 17.2 Edit config.txt 
 
-cd boot
-nano config.txt
+    cd boot
+    nano config.txt
 
 Add to the end
 
-[cm4]
-# Enable host mode on the 2711 built-in XHCI USB controller.
-# This line should be removed if the legacy DWC2 controller is required
-# (e.g. for USB device mode) or if USB support is not required.
-otg_mode=1
-# Switch to external antenna.
-dtparam=ant2
+    [cm4]
+    # Enable host mode on the 2711 built-in XHCI USB controller.
+    # This line should be removed if the legacy DWC2 controller is required
+    # (e.g. for USB device mode) or if USB support is not required.
+    otg_mode=1
+    # Switch to external antenna.
+    dtparam=ant2
 
 18. Switch to boot from NVME drive
 
@@ -141,8 +141,8 @@ Reference: https://github.com/raspberrypi/usbboot
 
 18.1 Update boot order
 
-cd usbboot
-nano recovery/boot.conf
+    cd usbboot
+    nano recovery/boot.conf
 
 replace 
 BOOT_ORDER=0xf25641
@@ -152,12 +152,12 @@ BOOT_ORDER=0xf25416
 
 18.2 Update the pieeprom.bin file with the new settings
 
-cd recovery
-./update-pieeprom.sh
+    cd recovery
+    ./update-pieeprom.sh
 
 18.3 Connect your CM4 in USB boot mode and run
 
-../rpiboot -d .
+    ../rpiboot -d .
 
 After a few seconds it should successfully update the EEPROM and the new boot order should be ready. 
 The activity LED should start blinking rapidly once complete.
@@ -170,55 +170,57 @@ The activity LED should start blinking rapidly once complete.
 
 19.1 Create public key
 
-ssh-keygen -t ed25519 -C "your_email@example.com"
-cp hass.pub authorized_keys
+    ssh-keygen -t ed25519 -C "your_email@example.com"
+    cp hass.pub authorized_keys
 
 19.2 Copy an authorized_keys file to the root of the USB flash drive with label CONFIG and FAT, ext4, or NTFS filesystem. 
 19.3 Insert flash drive and keyboard to compute module system and switch power on
 19.4 In CM4 console run
 
-host shutdown 
+    host shutdown 
 
 19.5 Remove flash drive and keyboard and switch power on and wait until system boot up
 19.6 Add ssh key
 
-chmod 600 name_of_privatekey
-ssh-add name_of_privatekey
+    chmod 600 name_of_privatekey
+    ssh-add name_of_privatekey
 
 19.7 Check SSH key
 
-ssh-add -l
+    ssh-add -l
 
 and make sure that key is here
 
 19.8 Login to SSH 
 
-ssh root@homeassistant.local -p 22222
+    ssh root@homeassistant.local -p 22222
 
 20. Enable fan, RTC and I2S
 
 20.1 Edit config
-vi /mnt/boot/config.txt
+
+    vi /mnt/boot/config.txt
 
 add
 
-# Enable RTC
-dtparam=i2c_vc=on
-dtoverlay=i2c-rtc,pcf85063a,i2c_csi_dsi
-
-# Fan Controller
-dtoverlay=i2c-fan,emc2301,i2c_csi_dsi,midtemp=45000,maxtemp=50000
-
-#I2S DAC
-dtparam=i2s=on
-dtoverlay=hifiberry-dac
+    # Enable RTC
+    dtparam=i2c_vc=on
+    dtoverlay=i2c-rtc,pcf85063a,i2c_csi_dsi
+    
+    # Fan Controller
+    dtoverlay=i2c-fan,emc2301,i2c_csi_dsi,midtemp=45000,maxtemp=50000
+    
+    #I2S DAC
+    dtparam=i2s=on
+    dtoverlay=hifiberry-dac
 
 Comment out
-#dtparam=audio=on
+
+    #dtparam=audio=on
 
 20.1 Reboot 
 
-ha host reboot
+    ha host reboot
 
 21. Setup HA 
 
@@ -240,16 +242,16 @@ and add new user for mosquitto
 22.4 Enable watchdog
 22.5 Configuration (switch to YAML):
 
-logins:
-  - username: myusername-change-this
-    password: mypassword-change-this
-require_certificate: false
-certfile: fullchain.pem
-keyfile: privkey.pem
-customize:
-  active: false
-  folder: mosquitto
-anonymous: false
+    logins:
+      - username: myusername-change-this
+        password: mypassword-change-this
+    require_certificate: false
+    certfile: fullchain.pem
+    keyfile: privkey.pem
+    customize:
+      active: false
+      folder: mosquitto
+    anonymous: false
 
 22.6 Press "Start"
 
@@ -265,11 +267,11 @@ anonymous: false
 24.1 Open http://homeassistant.local:8123/hassio/store and find "Terminal & SSH", select it and press "Install", then "Start"
 24.2 Press "Open Web UI" and in terminal paste
 
-wget -O - https://get.hacs.xyz | bash -
+    wget -O - https://get.hacs.xyz | bash -
 
 24.3 Restart HA
 
-ha core restart
+    ha core restart
 
 24.4 Open "Settings", then "Devices & Services", then "Add integration"
 24.5 Search for "HACS" and select it.
@@ -279,7 +281,7 @@ ha core restart
 24.9 Press "Finish" in popup
 24.10 Open http://homeassistant.local:8123/hassio/addon/core_ssh/info , then Press "Open Web UI" and in terminal paste
 
-ha core restart
+    ha core restart
 
 25. Install Music Assistant
 
@@ -288,7 +290,7 @@ ha core restart
 25.3 Click "Download", click "Download"
 25.4 Open http://homeassistant.local:8123/hassio/addon/core_ssh/info , then Press "Start", then "Open Web UI" and in terminal paste
 
-ha core restart
+    ha core restart
 
 25.5 Open "Settings", then "Devices & Services", then "Add integration"
 25.6 Search for "Music Assistant" and select it.

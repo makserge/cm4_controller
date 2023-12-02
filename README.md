@@ -106,23 +106,22 @@ All steps are done on macOS.
 13. Attach the power cable.
 14. Wait until Raspberry PI OS boot complete
 15. Make initial OS setup (timezone, user etc.)
-16. Flash HASS 
-
+16. Flash HASS
     16.1 From menu open "Accessories", then "Image"
-    16.2 Select OS: "Other specific-purpose OS”, then "Home assistants and home automation", then "Home assistant", then "Home assistant OS 9.4 (RPI 4/400)"  
+    16.2 Select OS: "Other specific-purpose OS”, then "Home assistants and home automation", then "Home assistant", then "Home assistant OS 11.1 (RPI 4/400)"  
     16.3 Choose NVME storage 
-    16.4. Press "Write" and wait until flashing complete (about 3 minutes)
+    16.4. Press "Next", then "Yes", enter user password and wait until flashing complete (about 5 minutes)
 
-17. Enable USB and external Wi-Fi antenna
-
+18. Enable USB and external Wi-Fi antenna
     17.1 Mount partition to some folder
     
+        cd
         mkdir boot
-    
         sudo mount -t msdos /dev/nvme0n1p1 boot
     
     17.2 Edit config.txt 
-    
+
+        sudo su
         cd boot
         nano config.txt
     
@@ -135,6 +134,8 @@ All steps are done on macOS.
         otg_mode=1
         # Switch to external antenna.
         dtparam=ant2
+
+    17.3 Shutdown Compute module
 
 18. Switch to boot from NVME drive
 
@@ -164,7 +165,9 @@ Reference: https://github.com/raspberrypi/usbboot
     The activity LED should start blinking rapidly once complete.
     
     18.4 Shutdown Compute module
+    
     18.5 Switch BOOT to OFF on IO board
+    
     18.6 Connect USB type-c cable both to IO board and computer
 
 19. Enable SSH on host
@@ -174,13 +177,16 @@ Reference: https://github.com/raspberrypi/usbboot
         ssh-keygen -t ed25519 -C "your_email@example.com"
         cp hass.pub authorized_keys
     
-    19.2 Copy an authorized_keys file to the root of the USB flash drive with label CONFIG and FAT, ext4, or NTFS filesystem. 
+    19.2 Copy an authorized_keys file to the root of the USB flash drive with label CONFIG and FAT, ext4, or NTFS filesystem.
+     
     19.3 Insert flash drive and keyboard to compute module system and switch power on
+    
     19.4 In CM4 console run
     
         host shutdown 
     
     19.5 Remove flash drive and keyboard and switch power on and wait until system boot up
+
     19.6 Add ssh key
     
         chmod 600 name_of_privatekey
@@ -227,11 +233,16 @@ Reference: https://github.com/raspberrypi/usbboot
 
     21.1 In the browser of your Computer, within a few minutes you will be able to reach your new Home Assistant on 
     homeassistant.local:8123
-    21.2. Wait for about 5 minutes for preparing
-    21.3 Create administrator account
+
+    21.2. Wait for about 10 minutes for preparing
+
+    21.3 Press "Create my smart home" and create admin account
+
     21.4. Choose country and language, press "Next", press "Next", press "Finish"
+
     21.5 Enable advanced mode
-    Open http://homeassistant.local:8123/profile
+
+    Open http://homeassistant.local:8123/profile and toggle "Advanced mode" to On
 
 22. MQTT Mosquitto broker
 
@@ -239,9 +250,12 @@ Reference: https://github.com/raspberrypi/usbboot
     and add new user for mosquitto
     
     22.2 Open http://homeassistant.local:8123/hassio/store and find "Mosquitto"
+
     22.3 Press "Install" and wait until it installed
+
     22.4 Enable watchdog
-    22.5 Configuration (switch to YAML):
+
+    22.5 Tap "Configuration", switch to YAML and paste config
     
         logins:
           - username: myusername-change-this
@@ -254,18 +268,22 @@ Reference: https://github.com/raspberrypi/usbboot
           folder: mosquitto
         anonymous: false
     
-    22.6 Press "Start"
+    22.6 Click "Save", then tap "Info", then click "Start"
 
 23. Install Samba Add-on
 
     23.1 Open http://homeassistant.local:8123/hassio/store and find "Samba"
+  
     23.2 Click on "Samba share" then "Install"
+
     23.3 Tap "Configuration" tab and fill username / password then press "Save"
+
     23.4 Tap "Info" tab and click "Start"
 
 24. Install HACS Add-on
 
     24.1 Open http://homeassistant.local:8123/hassio/store and find "Terminal & SSH", select it and press "Install", then "Start"
+
     24.2 Press "Open Web UI" and in terminal paste
     
         wget -O - https://get.hacs.xyz | bash -
@@ -275,29 +293,36 @@ Reference: https://github.com/raspberrypi/usbboot
         ha core restart
     
     24.4 Open "Settings", then "Devices & Services", then "Add integration"
+
     24.5 Search for "HACS" and select it.
+
     24.6 Check all checkboxes and press "Submit"
+
     24.7 Open provided link in new browser tab and enter Device activation key taken from this popup
+
     24.8 Press "Continue" then "Authorize hacs"
+
     24.9 Press "Finish" in popup
+
     24.10 Open http://homeassistant.local:8123/hassio/addon/core_ssh/info , then Press "Open Web UI" and in terminal paste
     
         ha core restart
 
-25. Install Music Assistant
+25. Install FTP
 
-    25.1 In the HACS panel, go to integrations.
-    25.2 Search for "Music Assistant" and click "Explore & Download repositories", then select "Music Assistant" 
-    25.3 Click "Download", click "Download"
-    25.4 Open http://homeassistant.local:8123/hassio/addon/core_ssh/info , then Press "Start", then "Open Web UI" and in terminal paste
+    25.1 Open "Settimgs", then "Add-ons", then "Add-on Store", choose "FTP" and click "Install"
+
+    25.2 Press "Start"
     
-        ha core restart
-    
-    25.5 Open "Settings", then "Devices & Services", then "Add integration"
-    25.6 Search for "Music Assistant" and select it.
-    25.7 Complete configuration wizard
+    25.3 Tap "Configuration" tab and fill username / password then press "Save"
 
+26. Install MPD
 
+    26.1 Open https://community.home-assistant.io/t/mpd-music-player-daemon-addon/320446
+
+    26.2 Press "Add repository to my HomeAssistant", then "Install on my HomeAssistant"
+
+    26.3 Press "Start"
 
 
 

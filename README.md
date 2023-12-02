@@ -1,4 +1,4 @@
-# HASS.io install on CM4 with Waveshare CM4-IO-BASE-B, 1TB NVME 2242 SSD and PVA030C05L-P01 3010 fan 5V
+# HASS.io install on CM4 with Waveshare CM4-IO-BASE-B, 2TB NVME 2242 SSD and PVA030C05L-P01 3010 fan 5V
 
 Reference to official installation guide:
 https://www.home-assistant.io/installation/raspberrypi

@@ -310,19 +310,54 @@ Reference: https://github.com/raspberrypi/usbboot
 
 25. Install FTP
 
-    25.1 Open "Settimgs", then "Add-ons", then "Add-on Store", choose "FTP" and click "Install"
+    25.1 Open "Settings", then "Add-ons", then "Add-on Store", choose "FTP" and click "Install"
 
-    25.2 Press "Start"
+    25.2 Press "Install" and wait until it installed
+
+    25.3 Enable watchdog
+
+    25.4 Tap "Configuration", switch to YAML and paste config (with different username and password)
+
+port: 3721
+data_port: 20
+banner: Welcome to the Hass.io FTP service.
+pasv: true
+pasv_min_port: 30000
+pasv_max_port: 30010
+pasv_address: ""
+ssl: false
+certfile: fullchain.pem
+keyfile: privkey.pem
+implicit_ssl: false
+max_clients: 5
+users:
+  - username: hassio
+    password: changeme
+    allow_chmod: false
+    allow_download: true
+    allow_upload: true
+    allow_dirlist: true
+    addons: false
+    backup: false
+    config: false
+    media: true
+    share: true
+    ssl: false
     
-    25.3 Tap "Configuration" tab and fill username / password then press "Save"
 
-26. Install MPD
+    25.5 Press "Save" and then "Start"
+
+27. Install MPD
 
     26.1 Open https://community.home-assistant.io/t/mpd-music-player-daemon-addon/320446
 
-    26.2 Press "Add repository to my HomeAssistant", then "Install on my HomeAssistant"
+    26.2 Press "Add repository to my HomeAssistant", open link in HomeAssistant and add repository, then press "Close"
 
-    26.3 Press "Start"
+    26.3 Press two times back in brrowser to return to https://community.home-assistant.io/t/mpd-music-player-daemon-addon/320446
+
+    26.4 Press "Install on my HomeAssistant", open link in HomeAssistant, then press "Install"
+
+    26.5 Press "Start"
 
 
 

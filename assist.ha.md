@@ -15,3 +15,11 @@ Reference https://www.home-assistant.io/voice_control/voice_remote_local_assista
 11. Under Wakeword engine, select "openwakeword"
 12. Under Wakeword, select "ok nabu"
 13. Press "Create"
+14. Go to Settings -> Devices & Services -> Helpers
+15. Click the Create Helper button and select the Toggle option in the list
+16. Enter some name, choose icon "mdi:toggle-switch" and press "Create"
+17. Go to Settings > Voice assistants. Open the Expose tab.
+18. Select Expose entities and toggle "Expose" and add alias "Switch" on just created entity
+19. Open Overview and touch Assist button
+20. Type or say in microphone "Switch on" then state of switch should be changed to on
+21. Type or say in microphone "Switch off" then state of switch should be changed to off  

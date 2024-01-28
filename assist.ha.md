@@ -1,4 +1,4 @@
-#Local Voice assistant on HA
+# Local Voice assistant on HA
 
 Reference https://www.home-assistant.io/voice_control/voice_remote_local_assistant
 
